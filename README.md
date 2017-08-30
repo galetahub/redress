@@ -59,6 +59,27 @@ class ApplicationForm < Redress::Form
 end
 ```
 
+Let's define simple form:
+
+``` ruby
+class SimpleForm < ApplicationForm
+  mimic :user
+
+  schema do
+    attribute :name, String
+    attribute :email, String
+    attribute :name_with_email, String
+  end
+
+  validates :name, presence: true
+  validates :email, presence: true
+
+  def map_model(user)
+    self.name_with_email = "#{user.name} <#{user.email}>"
+  end
+end
+```
+
 ### Commands
 
 ``` ruby

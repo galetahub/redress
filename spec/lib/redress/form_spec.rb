@@ -5,6 +5,7 @@ require "spec_helper"
 RSpec.describe Redress::Form do
   let(:params) { {name: "test", email: "test@example.com", id: 1} }
   let(:form) { SimpleForm.from_params(user: params) }
+  let(:model) { User.new(name: "Test", email: "test@example.com") }
 
   it "must get model_name" do
     expect(SimpleForm.model_name.is_a?(ActiveModel::Name)).to eq true
@@ -32,5 +33,23 @@ RSpec.describe Redress::Form do
 
     expect(form.properties.key?(:name_with_email)).to eq true
     expect(form.properties.key?(:id)).to eq false
+  end
+
+  it "must set context" do
+    form.with_context(user: model)
+
+    expect(form.context.user).to eq model
+  end
+
+  it "without context" do
+    expect(form.context).to eq nil
+  end
+
+  it "must build form from model" do
+    form = SimpleForm.from_model(model)
+
+    expect(form.name).to eq model.name
+    expect(form.email).to eq model.email
+    expect(form.name_with_email).to eq "#{model.name} <#{model.email}>"
   end
 end
