@@ -4,3 +4,6 @@ require "redress/identity"
 
 module Redress
 end
+
+require "redress/form"
+require "redress/command"

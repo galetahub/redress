@@ -4,13 +4,18 @@ require "fast_attributes"
 require "hashie/mash"
 require "active_model"
 
+require "redress/utils/parse_attributes_from_params"
+require "redress/utils/build_form_from_model"
+require "redress/utils/attributes_builder"
+require "redress/utils/attribute_set"
+
 module Redress
   class Form
     extend FastAttributes
     include ActiveModel::Validations
 
-    DEFAULT_NAME = "Form".freeze
-    SPLITTER = "::".freeze
+    DEFAULT_NAME = "Form"
+    SPLITTER = "::"
 
     attr_reader :context
 

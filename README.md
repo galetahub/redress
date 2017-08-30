@@ -1,6 +1,11 @@
 # Redress
 
 [![Gem Version](https://badge.fury.io/rb/redress.svg)](http://badge.fury.io/rb/redress)
+[![Code Climate](https://codeclimate.com/github/galetahub/redress/badges/gpa.svg)](https://codeclimate.com/github/galetahub/redress)
+
+## Motivation
+
+TODO:
 
 <!-- Tocer[start]: Auto-generated, don't remove. -->
 
@@ -23,11 +28,13 @@
 
 ## Features
 
+TODO:
+
 ## Screencasts
 
 ## Requirements
 
-0. [Ruby 2.4.1](https://www.ruby-lang.org)
+0. [Ruby 2.3](https://www.ruby-lang.org)
 
 ## Setup
 
@@ -50,11 +57,15 @@ Add the following to your Gemfile:
 
 ## Usage
 
+``` ruby
+require 'redress/form'
+
 class ApplicationCommand < Redress::Commad
   def transaction(&block)
     ActiveRecord::Base.transaction(&block) if block_given?
   end
 end
+```
 
 ## Tests
 
@@ -81,7 +92,7 @@ Read [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
 
-Copyright (c) 2017 []().
+Copyright (c) 2017 [Fodojo LLC](https://www.fodojo.com/).
 Read [LICENSE](LICENSE.md) for details.
 
 ## History
