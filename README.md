@@ -33,24 +33,13 @@ TODO:
 
 TODO:
 
-## Screencasts
-
 ## Requirements
 
 0. [Ruby 2.3](https://www.ruby-lang.org)
 
 ## Setup
 
-For a secure install, type the following (recommended):
-
-    gem cert --add <(curl --location --silent /gem-public.pem)
-    gem install redress --trust-policy MediumSecurity
-
-NOTE: A HighSecurity trust policy would be best but MediumSecurity enables signed gem verification
-while allowing the installation of unsigned dependencies since they are beyond the scope of this
-gem.
-
-For an insecure install, type the following (not recommended):
+For an insecure install, type the following:
 
     gem install redress
 
@@ -60,7 +49,30 @@ Add the following to your Gemfile:
 
 ## Usage
 
+### Forms
+
 ``` ruby
+# app/forms/application_form.rb
+require 'redress/form'
+
+class ApplicationForm < Redress::Form
+end
+```
+
+### Commands
+
+``` ruby
+# app/commands/application_command.rb
+require 'redress/form'
+
+class ApplicationCommand < Redress::Commad
+end
+```
+
+Or if you are using ActiveRecord:
+
+``` ruby
+# app/commands/application_command.rb
 require 'redress/form'
 
 class ApplicationCommand < Redress::Commad
@@ -74,7 +86,7 @@ end
 
 To test, run:
 
-    bundle exec rake
+    bundle exec rspec ./spec/
 
 ## Versioning
 

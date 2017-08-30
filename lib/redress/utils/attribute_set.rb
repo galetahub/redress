@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
+require "redress/utils/attribute_node"
+
 module Redress
   module Utils
     class AttributeSet
       include Enumerable
-
-      class AttributeNode
-        attr_reader :name, :type, :options
-
-        def initialize(item)
-          @name = Array(item[0])[0]
-          @type = item[1]
-          @options = item[2]
-        end
-      end
 
       def initialize(raw_attributes)
         @raw_attributes = Array(raw_attributes)
