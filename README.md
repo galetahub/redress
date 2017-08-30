@@ -50,6 +50,12 @@ Add the following to your Gemfile:
 
 ## Usage
 
+class ApplicationCommand < Redress::Commad
+  def transaction(&block)
+    ActiveRecord::Base.transaction(&block) if block_given?
+  end
+end
+
 ## Tests
 
 To test, run:
@@ -85,5 +91,5 @@ Built with [Gemsmith](https://github.com/bkuhlmann/gemsmith).
 
 ## Credits
 
-Developed by [Igor Galeta]() at
-[]().
+Developed by [Igor Galeta](https://www.linkedin.com/in/igor-galeta-585a9730/) at
+[Fodojo LLC](https://www.fodojo.com/).

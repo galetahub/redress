@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.platform = Gem::Platform::RUBY
   spec.authors = ["Igor Galeta"]
   spec.email = ["galeta.igor@gmail.com"]
-  spec.homepage = ""
-  spec.summary = ""
+  spec.homepage = "https://github.com/galetahub/redress"
+  spec.summary = "Build maintainable Ruby apps"
   spec.license = "MIT"
 
   if File.exist?(Gem.default_key_path) && File.exist?(Gem.default_cert_path)
@@ -18,7 +18,13 @@ Gem::Specification.new do |spec|
     spec.cert_chain = [Gem.default_cert_path]
   end
 
-  spec.required_ruby_version = "~> 2.4"
+  spec.required_ruby_version = "~> 2.3"
+
+  spec.add_dependency "wisper", ">= 1.6.1"
+  spec.add_dependency "fast_attributes", ">= 0.9.0"
+  spec.add_dependency "hashie", ">= 3.5.0"
+  spec.add_dependency "activemodel", ">= 4.2.0"
+
   spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "gemsmith", "~> 10.2"
   spec.add_development_dependency "pry", "~> 0.10"
