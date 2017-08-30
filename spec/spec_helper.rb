@@ -5,8 +5,14 @@ require "pry"
 require "pry-byebug"
 require "pry-state"
 require "redress"
+
 Dir[File.join(File.dirname(__FILE__), "support/shared_contexts/**/*.rb")].each do |file|
   require file
+end
+
+require "coveralls"
+Coveralls.wear! do
+  add_filter "spec"
 end
 
 RSpec.configure do |config|
