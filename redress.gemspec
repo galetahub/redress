@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "guard-rspec", "~> 4.7"
   spec.add_development_dependency "reek", "~> 4.7"
   spec.add_development_dependency "rubocop", "~> 0.49"
+  spec.add_development_dependency "coveralls", "~> 0.8.21"
 
   spec.files = Dir["lib/**/*"]
   spec.extra_rdoc_files = Dir["README*", "LICENSE*"]
