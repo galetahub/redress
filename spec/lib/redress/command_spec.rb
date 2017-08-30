@@ -3,21 +3,6 @@
 require "spec_helper"
 
 RSpec.describe Redress::Command do
-  class SimpleCommand < described_class
-    attr_reader :value
-
-    def initialize(a, b)
-      @a = a
-      @b = b
-    end
-
-    def call
-      @value = @a + @b
-
-      broadcast(:ok, @value)
-    end
-  end
-
   let(:a) { 1 }
   let(:b) { 2 }
 

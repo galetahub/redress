@@ -8,6 +8,7 @@ require "redress/utils/parse_attributes_from_params"
 require "redress/utils/build_form_from_model"
 require "redress/utils/attributes_builder"
 require "redress/utils/attribute_set"
+require "redress/utils/attributes_hash"
 
 module Redress
   class Form
@@ -76,7 +77,7 @@ module Redress
     end
 
     def properties
-      @properties ||= attributes.with_indifferent_access
+      @properties ||= Redress::Utils::AttributesHash.new(attributes)
     end
 
     def map_model(model)
