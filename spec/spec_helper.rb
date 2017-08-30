@@ -1,5 +1,17 @@
 # frozen_string_literal: true
 
+if ENV["CI"]
+  require "coveralls"
+  Coveralls.wear! do
+    add_filter "spec"
+  end
+else
+  require "simplecov"
+  SimpleCov.start do
+    add_filter "spec"
+  end
+end
+
 require "bundler/setup"
 require "pry"
 require "pry-byebug"
@@ -8,13 +20,6 @@ require "redress"
 
 Dir[File.join(File.dirname(__FILE__), "support/shared_contexts/**/*.rb")].each do |file|
   require file
-end
-
-if ENV["CI"]
-  require "coveralls"
-  Coveralls.wear! do
-    add_filter "spec"
-  end
 end
 
 RSpec.configure do |config|
