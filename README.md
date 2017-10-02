@@ -6,16 +6,14 @@
 [![Coverage Status](https://coveralls.io/repos/github/galetahub/redress/badge.svg?branch=master)](https://coveralls.io/github/galetahub/redress?branch=master)
 [![Dependency Status](https://gemnasium.com/badges/github.com/galetahub/redress.svg)](https://gemnasium.com/github.com/galetahub/redress)
 
-## Motivation
+## Motivation (Command pattern)
 
-TODO:
+The command pattern is sometimes called a service object, an operation, an action, and probably more names that I’m not aware of. Whatever the name we gave it, the purpose of such a pattern is rather simple: take a business action and put it behind an object with a simple interface.
 
 <!-- Tocer[start]: Auto-generated, don't remove. -->
 
 ## Table of Contents
 
-  - [Features](#features)
-  - [Screencasts](#screencasts)
   - [Requirements](#requirements)
   - [Setup](#setup)
   - [Usage](#usage)
@@ -29,13 +27,13 @@ TODO:
 
 <!-- Tocer[finish]: Auto-generated, don't remove. -->
 
-## Features
-
-TODO:
-
 ## Requirements
 
 0. [Ruby 2.3](https://www.ruby-lang.org)
+1. wisper
+2. fast_attributes
+3. hashie
+4. activemodel
 
 ## Setup
 
