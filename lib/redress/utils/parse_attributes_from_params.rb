@@ -45,6 +45,7 @@ module Redress
           new_key = key.to_s
           next unless new_key.start_with?(prefix)
 
+          new_key = new_key.dup if new_key.frozen?
           new_key.slice!(full_prefix)
 
           hash[new_key] = value

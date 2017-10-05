@@ -55,5 +55,15 @@ RSpec.describe Redress::Utils::ParseAttributesFromParams do
       expect(parser.attributes[:id]).to eq nil
       expect(parser.attributes["id"]).to eq nil
     end
+
+    context "frozen" do
+      let(:key) { "user_name" }
+      let(:params) { {key => "Test", user_email: "test@example.com", id: 1}.freeze }
+
+      it "must parse attibutes" do
+        expect(parser.attributes[:name]).to eq params[key]
+        expect(parser.attributes[:email]).to eq params[:user_email]
+      end
+    end
   end
 end
