@@ -82,7 +82,7 @@ end
 
 ``` ruby
 # app/commands/application_command.rb
-require 'redress/form'
+require 'redress/command'
 
 class ApplicationCommand < Redress::Commad
 end
@@ -92,13 +92,57 @@ Or if you are using ActiveRecord:
 
 ``` ruby
 # app/commands/application_command.rb
-require 'redress/form'
+require 'redress/command'
 
 class ApplicationCommand < Redress::Commad
   def transaction(&block)
     ActiveRecord::Base.transaction(&block) if block_given?
   end
 end
+```
+
+Simple command for user registration:
+
+``` ruby
+# app/commands/users/create_command.rb
+module Users
+  class CreateCommand < ApplicationCommand
+    def initialize(form)
+      @form = form
+    end
+
+    def call
+      return broadcast(:invalid, @form) if @form.invalid?
+
+      user = User.create(@form.attributes)
+
+      broadcast(:ok, user)
+    end
+  end
+end
+```
+
+### Controllers
+
+``` ruby
+# app/controllers/users_controller.rb
+class UsersController < Account::BaseController
+  respond_to :json, only: :update
+
+  def new
+    @user_form = SimpleForm.new
+  end
+
+  def create
+    @user_form = SimpleForm.from_params(params)
+
+    Users::CreateCommand.call(@user_form) do |c|
+      c.on(:ok) { head status: 201 }
+      c.on(:invalid) { |form| render status: 422, json: { errors: form.errors } }
+    end
+  end
+end
+
 ```
 
 ## Tests
