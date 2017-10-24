@@ -68,6 +68,7 @@ class SimpleForm < ApplicationForm
     attribute :name, String
     attribute :email, String
     attribute :name_with_email, String
+    attribute :age, Redress::Types::Form::Int
   end
 
   validates :name, presence: true

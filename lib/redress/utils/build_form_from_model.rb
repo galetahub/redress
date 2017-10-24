@@ -9,24 +9,24 @@ module Redress
       end
 
       def build
-        form.tap do
-          matching_attributes.each do |name, _|
-            model_value = @model.public_send(name)
-            form.public_send("#{name}=", model_value)
-          end
-
-          form.map_model(@model)
-        end
+        form.map_model(@model)
+        form
       end
 
       private
 
       def form
-        @form ||= @form_class.new
+        @form ||= @form_class.new(model_attributes)
+      end
+
+      def model_attributes
+        matching_attributes.each_with_object({}) do |name, hash|
+          hash[name] = @model.public_send(name)
+        end
       end
 
       def matching_attributes
-        form.attributes.select { |name, _| @model.respond_to?(name) }
+        @form_class.attribute_names.select { |name| @model.respond_to?(name) }
       end
     end
   end

@@ -55,8 +55,13 @@ module Redress
 
       yield
 
-      schema.each_key do |key|
-        attr_writer(key) unless instance_methods.include?(:"#{key}=")
+      attribute_names.each do |name|
+        method_name = :"#{name}="
+        next if instance_methods.include?(method_name)
+
+        define_method(method_name) do |value|
+          writer_attribute(name, value)
+        end
       end
     end
 
@@ -78,6 +83,15 @@ module Redress
     alias properties attributes
 
     def map_model(model)
+    end
+
+    protected
+
+    def writer_attribute(name, value)
+      return unless self.class.attribute?(name)
+
+      type = self.class.schema[name]
+      instance_variable_set("@#{name}", type[value])
     end
   end
 end

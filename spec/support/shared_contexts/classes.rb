@@ -23,6 +23,7 @@ class SimpleForm < Redress::Form
     attribute :name, Redress::Types::String
     attribute :email, Redress::Types::String
     attribute :name_with_email, Redress::Types::String
+    attribute :age, Redress::Types::Form::Int
   end
 
   validates :name, presence: true
@@ -34,10 +35,11 @@ class SimpleForm < Redress::Form
 end
 
 class User
-  attr_reader :name, :email
+  attr_reader :name, :email, :age
 
   def initialize(options)
     @name = options[:name]
     @email = options[:email]
+    @age = options[:age]
   end
 end

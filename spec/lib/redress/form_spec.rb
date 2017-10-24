@@ -3,7 +3,7 @@
 require "spec_helper"
 
 RSpec.describe Redress::Form do
-  let(:params) { {name: "test", email: "test@example.com", id: 1} }
+  let(:params) { {name: "test", email: "test@example.com", id: 1, age: "30"} }
   let(:form) { SimpleForm.from_params(user: params) }
   let(:model) { User.new(name: "Test", email: "test@example.com") }
 
@@ -21,7 +21,19 @@ RSpec.describe Redress::Form do
 
   it "must get schema" do
     schema = SimpleForm.schema
-    expect(schema.keys).to eq %i[nickname name email name_with_email]
+    expect(schema.keys).to eq %i[nickname name email name_with_email age]
+  end
+
+  it "must coercion age value" do
+    expect(form.age).to eq 30
+  end
+
+  it "must coercion dynamic age value" do
+    form.age = ""
+    expect(form.age).to eq nil
+
+    form.age = "20"
+    expect(form.age).to eq 20
   end
 
   it "must read properties" do
