@@ -1,24 +1,27 @@
 # frozen_string_literal: true
 
-require "fast_attributes"
 require "hashie/mash"
 require "active_model"
+require "dry-struct"
 
 require "redress/utils/parse_attributes_from_params"
 require "redress/utils/build_form_from_model"
-require "redress/utils/attributes_builder"
-require "redress/utils/attribute_set"
 require "redress/utils/attributes_hash"
 
 module Redress
-  class Form
-    extend FastAttributes
+  class Form < Dry::Struct
     include ActiveModel::Validations
 
     DEFAULT_NAME = "Form"
     SPLITTER = "::"
 
     attr_reader :context
+
+    # https://github.com/dry-rb/dry-struct/blob/master/lib/dry/struct.rb
+    # schema - missing keys will result in setting them using default values,
+    # unexpected keys will be ignored.
+    #
+    constructor_type :schema
 
     def self.model_name
       ActiveModel::Name.new(self, nil, mimicked_model_name.to_s.camelize)
@@ -47,21 +50,14 @@ module Redress
       Redress::Utils::BuildFormFromModel.new(self, model).build
     end
 
-    def self.schema(options = {}, &block)
-      options = {
-        initialize: true,
-        attributes: true
-      }.merge!(options)
+    def self.define_schema(options = nil)
+      options.each { |key, value| public_send(key, value) } if options
 
-      builder = Redress::Utils::AttributesBuilder.new(self, options)
-      builder.instance_eval(&block)
-      builder.compile!
+      yield
 
-      @raw_attributes = builder.attributes
-    end
-
-    def self.attribute_set
-      @attribute_set ||= Redress::Utils::AttributeSet.new(@raw_attributes || [])
+      schema.each_key do |key|
+        attr_writer(key) unless instance_methods.include?(:"#{key}=")
+      end
     end
 
     def to_model
@@ -76,9 +72,10 @@ module Redress
       @context = Hashie::Mash.new(options)
     end
 
-    def properties
-      @properties ||= Redress::Utils::AttributesHash.new(attributes)
+    def attributes
+      @attributes ||= Redress::Utils::AttributesHash.new(to_hash)
     end
+    alias properties attributes
 
     def map_model(model)
     end

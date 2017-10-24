@@ -18,10 +18,11 @@ end
 class SimpleForm < Redress::Form
   mimic :user
 
-  schema do
-    attribute :name, String
-    attribute :email, String
-    attribute :name_with_email, String
+  define_schema do
+    attribute :nickname, Redress::Types::Strict::String.default("superman")
+    attribute :name, Redress::Types::String
+    attribute :email, Redress::Types::String
+    attribute :name_with_email, Redress::Types::String
   end
 
   validates :name, presence: true

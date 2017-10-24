@@ -31,7 +31,7 @@ The command pattern is sometimes called a service object, an operation, an actio
 
 0. [Ruby 2.3](https://www.ruby-lang.org)
 1. wisper
-2. fast_attributes
+2. dry-struct
 3. hashie
 4. activemodel
 
@@ -63,7 +63,8 @@ Let's define simple form:
 class SimpleForm < ApplicationForm
   mimic :user
 
-  schema do
+  define_schema do
+    attribute :nickname, Redress::Types::Strict::String.default("superman")
     attribute :name, String
     attribute :email, String
     attribute :name_with_email, String

@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = "~> 2.3"
 
   spec.add_dependency "wisper", ">= 1.6.1"
-  spec.add_dependency "fast_attributes", ">= 0.9.0"
+  spec.add_dependency "dry-struct", ">= 0.3.1"
   spec.add_dependency "hashie", ">= 3.5.0"
   spec.add_dependency "activemodel", ">= 4.2.0"
 

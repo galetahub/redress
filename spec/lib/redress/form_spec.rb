@@ -19,9 +19,9 @@ RSpec.describe Redress::Form do
     expect(SimpleForm.infer_model_name).to eq :simple
   end
 
-  it "must get attribute_set" do
-    set = SimpleForm.attribute_set
-    expect(set.names).to eq [:name, :email, :name_with_email]
+  it "must get schema" do
+    schema = SimpleForm.schema
+    expect(schema.keys).to eq %i[nickname name email name_with_email]
   end
 
   it "must read properties" do
