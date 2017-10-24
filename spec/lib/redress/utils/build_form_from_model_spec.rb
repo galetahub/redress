@@ -12,6 +12,10 @@ RSpec.describe Redress::Utils::BuildFormFromModel do
     expect(instance.is_a?(form_class)).to be true
   end
 
+  it "must detect matching attributes" do
+    expect(builder.send(:matching_attributes)).to eq %i[name email age]
+  end
+
   it "must copy attributes from model to form" do
     expect(instance.name).to eq model.name
     expect(instance.email).to eq model.email
