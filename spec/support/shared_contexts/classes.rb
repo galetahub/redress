@@ -34,6 +34,15 @@ class SimpleForm < Redress::Form
   end
 end
 
+class CommentForm < Redress::Form
+  define_schema do
+    attribute :id, Redress::Types::Form::Int
+    attribute :content, Redress::Types::String
+  end
+
+  validates :content, presence: true
+end
+
 class User
   attr_reader :name, :email, :age
 

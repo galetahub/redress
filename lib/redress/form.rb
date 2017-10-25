@@ -11,6 +11,7 @@ require "redress/utils/attributes_hash"
 module Redress
   class Form < Dry::Struct
     include ActiveModel::Validations
+    include ActiveModel::Conversion
 
     DEFAULT_NAME = "Form"
     SPLITTER = "::"
@@ -65,12 +66,8 @@ module Redress
       end
     end
 
-    def to_model
-      self
-    end
-
-    def to_param
-      id.to_s
+    def persisted?
+      respond_to?(:id) && id.present?
     end
 
     def with_context(options)

@@ -6,6 +6,7 @@ RSpec.describe Redress::Form do
   let(:params) { {name: "test", email: "test@example.com", id: 1, age: "30"} }
   let(:form) { SimpleForm.from_params(user: params) }
   let(:model) { User.new(name: "Test", email: "test@example.com") }
+  let(:comment) { CommentForm.new(content: "test", id: 1) }
 
   it "must get model_name" do
     expect(SimpleForm.model_name.is_a?(ActiveModel::Name)).to eq true
@@ -63,5 +64,23 @@ RSpec.describe Redress::Form do
     expect(form.name).to eq model.name
     expect(form.email).to eq model.email
     expect(form.name_with_email).to eq "#{model.name} <#{model.email}>"
+  end
+
+  it "must be not persisted" do
+    expect(form.persisted?).to eq false
+  end
+
+  it "must be persisted if id present" do
+    expect(comment.persisted?).to eq true
+  end
+
+  it "must return active_model to_key" do
+    expect(comment.to_key).to eq [1]
+    expect(form.to_key).to eq nil
+  end
+
+  it "must return active_model to_param" do
+    expect(comment.to_param).to eq 1.to_s
+    expect(form.to_param).to eq nil
   end
 end
