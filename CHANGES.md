@@ -1,3 +1,7 @@
+# v0.2.2
+
+- Add support for ActionController/Parameters (http://api.rubyonrails.org/classes/ActionController/Parameters.html)
+
 # v0.2.1
 
 - Include ActiveModel::Conversion at the form object

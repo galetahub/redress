@@ -49,7 +49,7 @@ Add the following to your Gemfile:
 
 ### Forms
 
-``` ruby
+```ruby
 # app/forms/application_form.rb
 require 'redress/form'
 
@@ -59,7 +59,7 @@ end
 
 Let's define simple form:
 
-``` ruby
+```ruby
 class SimpleForm < ApplicationForm
   mimic :user
 
@@ -80,9 +80,32 @@ class SimpleForm < ApplicationForm
 end
 ```
 
+Form with multiple comments:
+
+```ruby
+class CommentForm < Redress::Form
+  define_schema do
+    attribute :id, Redress::Types::Form::Int
+    attribute :content, Redress::Types::String
+  end
+
+  validates :content, presence: true
+end
+
+class OrderForm < Redress::Form
+  mimic :order
+
+  define_schema do
+    attribute :title, Redress::Types::String
+    attribute :comments, Redress::Types::Array.member(CommentForm)
+  end
+end
+```
+
+
 ### Commands
 
-``` ruby
+```ruby
 # app/commands/application_command.rb
 require 'redress/command'
 
@@ -92,7 +115,7 @@ end
 
 Or if you are using ActiveRecord:
 
-``` ruby
+```ruby
 # app/commands/application_command.rb
 require 'redress/command'
 
@@ -105,7 +128,7 @@ end
 
 Simple command for user registration:
 
-``` ruby
+```ruby
 # app/commands/users/create_command.rb
 module Users
   class CreateCommand < ApplicationCommand
@@ -126,7 +149,7 @@ end
 
 ### Controllers
 
-``` ruby
+```ruby
 # app/controllers/users_controller.rb
 class UsersController < Account::BaseController
   respond_to :json, only: :update

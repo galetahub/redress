@@ -83,4 +83,56 @@ RSpec.describe Redress::Form do
     expect(comment.to_param).to eq 1.to_s
     expect(form.to_param).to eq nil
   end
+
+  context "multiple" do
+    let(:params) do
+      {
+        title: "Test order",
+        non_exists_attribute: "with some value",
+        comments: [
+          {
+            id: 1,
+            content: "Content #1"
+          },
+          {
+            id: 2,
+            content: "Content #2"
+          }
+        ]
+      }
+    end
+
+    it "must parse order params with array of comments" do
+      form = OrderForm.from_params(order: params)
+
+      expect(form.comments.is_a?(Array)).to eq true
+      expect(form.comments.size).to eq 2
+
+      expect(form.attributes.key?(:non_exists_attribute)).to eq false
+      expect(form.attributes[:non_exists_attribute]).to eq nil
+
+      comment = form.comments[0]
+      expect(comment.is_a?(CommentForm)).to eq true
+    end
+
+    context "action_controller parameters" do
+      require "action_controller/metal/strong_parameters"
+
+      let(:order_params) do
+        ActionController::Parameters.new(order: params)
+      end
+
+      it "must parse order params" do
+        form = OrderForm.from_params(order_params)
+
+        expect(form.attributes.key?(:non_exists_attribute)).to eq false
+
+        expect(form.comments.is_a?(Array)).to eq true
+        expect(form.comments.size).to eq 2
+
+        comment = form.comments[0]
+        expect(comment.is_a?(CommentForm)).to eq true
+      end
+    end
+  end
 end

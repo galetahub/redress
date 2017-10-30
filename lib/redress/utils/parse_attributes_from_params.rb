@@ -7,7 +7,7 @@ module Redress
     class ParseAttributesFromParams
       def initialize(klass, params, options = nil)
         @klass = klass
-        @params = params
+        @params = convert_params_to_hash(params)
         @options = (options || {})
       end
 
@@ -52,6 +52,14 @@ module Redress
         end
 
         hash
+      end
+
+      def convert_params_to_hash(params)
+        if params.respond_to?(:to_unsafe_h)
+          params.to_unsafe_h
+        else
+          params
+        end
       end
     end
   end

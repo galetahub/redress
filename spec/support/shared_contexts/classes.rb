@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+class User
+  attr_reader :name, :email, :age
+
+  def initialize(options)
+    @name = options[:name]
+    @email = options[:email]
+    @age = options[:age]
+  end
+end
+
 class SimpleCommand < Redress::Command
   attr_reader :value
 
@@ -43,12 +53,11 @@ class CommentForm < Redress::Form
   validates :content, presence: true
 end
 
-class User
-  attr_reader :name, :email, :age
+class OrderForm < Redress::Form
+  mimic :order
 
-  def initialize(options)
-    @name = options[:name]
-    @email = options[:email]
-    @age = options[:age]
+  define_schema do
+    attribute :title, Redress::Types::String
+    attribute :comments, Redress::Types::Array.member(CommentForm)
   end
 end

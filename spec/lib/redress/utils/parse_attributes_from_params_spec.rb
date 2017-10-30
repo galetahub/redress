@@ -66,4 +66,26 @@ RSpec.describe Redress::Utils::ParseAttributesFromParams do
       end
     end
   end
+
+  context "action_controller parameters" do
+    require "action_controller/metal/strong_parameters"
+
+    let(:user) { {name: "test", email: "test@example.com", id: 1, non_exists_attribute: "value"} }
+    let(:params) { ActionController::Parameters.new(user: user) }
+
+    it "must parse model_attributes" do
+      expect(parser.model_attributes).to eq user.stringify_keys
+    end
+
+    it "must parse attributes" do
+      expect(parser.attributes[:name]).to eq user[:name]
+      expect(parser.attributes[:email]).to eq user[:email]
+
+      expect(parser.attributes[:id]).to eq nil
+      expect(parser.attributes[:non_exists_attribute]).to eq nil
+
+      expect(parser.attributes.key?(:id)).to eq false
+      expect(parser.attributes.key?(:non_exists_attribute)).to eq false
+    end
+  end
 end
