@@ -12,7 +12,7 @@ module Redress
     end
 
     def self.version
-      "0.2.2"
+      "0.2.3"
     end
 
     def self.version_label

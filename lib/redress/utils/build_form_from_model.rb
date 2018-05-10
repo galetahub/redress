@@ -21,7 +21,10 @@ module Redress
 
       def model_attributes
         matching_attributes.each_with_object({}) do |name, hash|
-          hash[name] = @model.public_send(name)
+          value = @model.public_send(name)
+          next if value.nil?
+
+          hash[name] = value
         end
       end
 

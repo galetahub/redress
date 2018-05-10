@@ -33,7 +33,7 @@ class SimpleForm < Redress::Form
     attribute :name, Redress::Types::String
     attribute :email, Redress::Types::String
     attribute :name_with_email, Redress::Types::String
-    attribute :age, Redress::Types::Form::Int
+    attribute :age, Redress::Types::Coercible::Integer
   end
 
   validates :name, presence: true
@@ -46,7 +46,7 @@ end
 
 class CommentForm < Redress::Form
   define_schema do
-    attribute :id, Redress::Types::Form::Int
+    attribute :id, Redress::Types::Coercible::Integer
     attribute :content, Redress::Types::String
   end
 
@@ -58,6 +58,6 @@ class OrderForm < Redress::Form
 
   define_schema do
     attribute :title, Redress::Types::String
-    attribute :comments, Redress::Types::Array.member(CommentForm)
+    attribute :comments, Redress::Types::Array.of(CommentForm)
   end
 end

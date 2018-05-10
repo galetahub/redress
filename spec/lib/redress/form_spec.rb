@@ -44,7 +44,7 @@ RSpec.describe Redress::Form do
     expect(form.properties[:name_with_email]).to eq nil
     expect(form.properties[:id]).to eq nil
 
-    expect(form.properties.key?(:name_with_email)).to eq true
+    expect(form.properties.key?(:name_with_email)).to eq false
     expect(form.properties.key?(:id)).to eq false
   end
 

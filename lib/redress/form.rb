@@ -18,11 +18,8 @@ module Redress
 
     attr_reader :context
 
-    # https://github.com/dry-rb/dry-struct/blob/master/lib/dry/struct.rb
-    # schema - missing keys will result in setting them using default values,
-    # unexpected keys will be ignored.
-    #
-    constructor_type :schema
+    transform_keys(&:to_sym)
+    transform_types { |type| type.meta(omittable: true) }
 
     def self.model_name
       ActiveModel::Name.new(self, nil, mimicked_model_name.to_s.camelize)
@@ -61,7 +58,7 @@ module Redress
         next if instance_methods.include?(method_name)
 
         define_method(method_name) do |value|
-          writer_attribute(name, value)
+          write_attribute(name, value)
         end
       end
     end
@@ -74,21 +71,25 @@ module Redress
       @context = Hashie::Mash.new(options)
     end
 
-    def attributes
-      @attributes ||= Redress::Utils::AttributesHash.new(to_hash)
+    def properties
+      @properties ||= Redress::Utils::AttributesHash.new(to_hash)
     end
-    alias properties attributes
 
     def map_model(model)
     end
 
     protected
 
-    def writer_attribute(name, value)
+    def write_attribute(name, value)
       return unless self.class.attribute?(name)
+      @attributes[name] = safe_coercion(name, value)
+    end
 
+    def safe_coercion(name, value)
       type = self.class.schema[name]
-      instance_variable_set("@#{name}", type[value])
+      type[value]
+    rescue ArgumentError
+      nil
     end
   end
 end
