@@ -20,22 +20,22 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = "~> 2.3"
 
-  spec.add_dependency "wisper", ">= 1.6.1"
-  spec.add_dependency "dry-struct", "~> 0.5.0"
-  spec.add_dependency "dry-types", "~> 0.13.0 "
-  spec.add_dependency "hashie", ">= 3.5.0"
   spec.add_dependency "activemodel", ">= 4.2.0"
+  spec.add_dependency "dry-struct", "~> 0.5.0"
+  spec.add_dependency "dry-types", "~> 0.13.2"
+  spec.add_dependency "hashie", ">= 3.5.7"
+  spec.add_dependency "wisper", ">= 2.0.0"
 
-  spec.add_development_dependency "rake", "~> 12.0"
+  spec.add_development_dependency "actionpack", "~> 5.1.4"
+  spec.add_development_dependency "coveralls", "~> 0.8.21"
+  spec.add_development_dependency "guard-rspec", "~> 4.7"
   spec.add_development_dependency "pry", "~> 0.10"
   spec.add_development_dependency "pry-byebug", "~> 3.4"
   spec.add_development_dependency "pry-state", "~> 0.1"
-  spec.add_development_dependency "rspec", "~> 3.6"
-  spec.add_development_dependency "guard-rspec", "~> 4.7"
+  spec.add_development_dependency "rake", "~> 12.0"
   spec.add_development_dependency "reek", "~> 4.7"
+  spec.add_development_dependency "rspec", "~> 3.6"
   spec.add_development_dependency "rubocop", "~> 0.49"
-  spec.add_development_dependency "coveralls", "~> 0.8.21"
-  spec.add_development_dependency "actionpack", "~> 5.1.4"
 
   spec.files = Dir["lib/**/*"]
   spec.extra_rdoc_files = Dir["README*", "LICENSE*"]
