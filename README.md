@@ -4,7 +4,6 @@
 [![Code Climate](https://codeclimate.com/github/galetahub/redress/badges/gpa.svg)](https://codeclimate.com/github/galetahub/redress)
 [![Build Status](https://semaphoreci.com/api/v1/igor-galeta/redress/branches/master/shields_badge.svg)](https://semaphoreci.com/igor-galeta/redress)
 [![Coverage Status](https://coveralls.io/repos/github/galetahub/redress/badge.svg?branch=master)](https://coveralls.io/github/galetahub/redress?branch=master)
-[![Dependency Status](https://gemnasium.com/badges/github.com/galetahub/redress.svg)](https://gemnasium.com/github.com/galetahub/redress)
 
 ## Motivation (Command pattern)
 
