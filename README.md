@@ -79,6 +79,21 @@ class SimpleForm < ApplicationForm
 end
 ```
 
+Form with default values (http://dry-rb.org/gems/dry-types/default-values/):
+
+```ruby
+require 'securerandom'
+
+class CommentForm < Redress::Form
+  define_schema do
+    attribute(:id, Redress::Types::Coercible::String.default { SecureRandom.uuid })
+    attribute(:content, Redress::Types::String)
+  end
+
+  validates :content, presence: true
+end
+```
+
 Form with multiple comments:
 
 ```ruby
