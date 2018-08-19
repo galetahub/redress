@@ -69,6 +69,7 @@ module Redress
 
     def with_context(options)
       @context = Hashie::Mash.new(options)
+      self
     end
 
     def properties
