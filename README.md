@@ -56,7 +56,7 @@ class ApplicationForm < Redress::Form
 end
 ```
 
-Let's define simple form:
+Let's define simple form (Built-in Types https://dry-rb.org/gems/dry-types/built-in-types/):
 
 ```ruby
 class SimpleForm < ApplicationForm
@@ -68,7 +68,7 @@ class SimpleForm < ApplicationForm
     attribute :email, String
     attribute :name_with_email, String
     attribute :age, Redress::Types::Coercible::Integer
-    atttibute :terms_of_service, Redress::Types::Coercible::Bool
+    atttibute :terms_of_service, Redress::Types::Bool
   end
 
   validates :name, presence: true
