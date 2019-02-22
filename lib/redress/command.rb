@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "wisper"
+require 'wisper'
 
 module Redress
   class Command

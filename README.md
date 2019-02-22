@@ -68,6 +68,7 @@ class SimpleForm < ApplicationForm
     attribute :email, String
     attribute :name_with_email, String
     attribute :age, Redress::Types::Coercible::Integer
+    atttibute :terms_of_service, Redress::Types::Coercible::Bool
   end
 
   validates :name, presence: true
@@ -116,6 +117,27 @@ class OrderForm < Redress::Form
 end
 ```
 
+Form with context:
+
+```
+class CommentForm < Redress::Form
+  define_schema do
+    attribute :id, Redress::Types::Coercible::Integer
+    attribute :content, Redress::Types::String
+  end
+
+  validates :content, presence: true
+  validate :unsure_order_state_waiting
+
+  private
+
+  def unsure_order_state_waiting
+    context.order.state?(:waiting)
+  end
+end
+
+CommentForm.new(content: 'Hi').with_context(order: order)
+```
 
 ### Commands
 

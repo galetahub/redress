@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "hashie"
+require 'hashie'
 
 module Redress
   module Utils

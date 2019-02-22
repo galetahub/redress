@@ -1,20 +1,20 @@
 # frozen_string_literal: true
 
-require "hashie/mash"
-require "active_model"
-require "dry-struct"
+require 'hashie/mash'
+require 'active_model'
+require 'dry-struct'
 
-require "redress/utils/parse_attributes_from_params"
-require "redress/utils/build_form_from_model"
-require "redress/utils/attributes_hash"
+require 'redress/utils/parse_attributes_from_params'
+require 'redress/utils/build_form_from_model'
+require 'redress/utils/attributes_hash'
 
 module Redress
   class Form < Dry::Struct
     include ActiveModel::Validations
     include ActiveModel::Conversion
 
-    DEFAULT_NAME = "Form"
-    SPLITTER = "::"
+    DEFAULT_NAME = 'Form'
+    SPLITTER = '::'
 
     attr_reader :context
 
@@ -83,8 +83,11 @@ module Redress
 
     def write_attribute(name, value)
       return unless self.class.attribute?(name)
+
       @attributes[name] = safe_coercion(name, value)
     end
+
+    private
 
     def safe_coercion(name, value)
       type = self.class.schema[name]

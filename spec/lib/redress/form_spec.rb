@@ -1,43 +1,43 @@
 # frozen_string_literal: true
 
-require "spec_helper"
+require 'spec_helper'
 
 RSpec.describe Redress::Form do
-  let(:params) { {name: "test", email: "test@example.com", id: 1, age: "30"} }
+  let(:params) { {name: 'test', email: 'test@example.com', id: 1, age: '30'} }
   let(:form) { SimpleForm.from_params(user: params) }
-  let(:model) { User.new(name: "Test", email: "test@example.com") }
-  let(:comment) { CommentForm.new(content: "test", id: 1) }
+  let(:model) { User.new(name: 'Test', email: 'test@example.com') }
+  let(:comment) { CommentForm.new(content: 'test', id: 1) }
 
-  it "must get model_name" do
+  it 'must get model_name' do
     expect(SimpleForm.model_name.is_a?(ActiveModel::Name)).to eq true
   end
 
-  it "must get mimicked_model_name" do
+  it 'must get mimicked_model_name' do
     expect(SimpleForm.mimicked_model_name).to eq :user
   end
 
-  it "must get infer_model_name" do
+  it 'must get infer_model_name' do
     expect(SimpleForm.infer_model_name).to eq :simple
   end
 
-  it "must get schema" do
+  it 'must get schema' do
     schema = SimpleForm.schema
     expect(schema.keys).to eq %i[nickname name email name_with_email age]
   end
 
-  it "must coercion age value" do
+  it 'must coercion age value' do
     expect(form.age).to eq 30
   end
 
-  it "must coercion dynamic age value" do
-    form.age = ""
+  it 'must coercion dynamic age value' do
+    form.age = ''
     expect(form.age).to eq nil
 
-    form.age = "20"
+    form.age = '20'
     expect(form.age).to eq 20
   end
 
-  it "must read properties" do
+  it 'must read properties' do
     expect(form.properties[:name]).to eq params[:name]
     expect(form.properties[:email]).to eq params[:email]
 
@@ -48,17 +48,17 @@ RSpec.describe Redress::Form do
     expect(form.properties.key?(:id)).to eq false
   end
 
-  it "must set context" do
+  it 'must set context' do
     form.with_context(user: model)
 
     expect(form.context.user).to eq model
   end
 
-  it "without context" do
+  it 'without context' do
     expect(form.context).to eq nil
   end
 
-  it "must build form from model" do
+  it 'must build form from model' do
     form = SimpleForm.from_model(model)
 
     expect(form.name).to eq model.name
@@ -66,43 +66,43 @@ RSpec.describe Redress::Form do
     expect(form.name_with_email).to eq "#{model.name} <#{model.email}>"
   end
 
-  it "must be not persisted" do
+  it 'must be not persisted' do
     expect(form.persisted?).to eq false
   end
 
-  it "must be persisted if id present" do
+  it 'must be persisted if id present' do
     expect(comment.persisted?).to eq true
   end
 
-  it "must return active_model to_key" do
+  it 'must return active_model to_key' do
     expect(comment.to_key).to eq [1]
     expect(form.to_key).to eq nil
   end
 
-  it "must return active_model to_param" do
+  it 'must return active_model to_param' do
     expect(comment.to_param).to eq 1.to_s
     expect(form.to_param).to eq nil
   end
 
-  context "multiple" do
+  context 'multiple' do
     let(:params) do
       {
-        title: "Test order",
-        non_exists_attribute: "with some value",
+        title: 'Test order',
+        non_exists_attribute: 'with some value',
         comments: [
           {
             id: 1,
-            content: "Content #1"
+            content: 'Content #1'
           },
           {
             id: 2,
-            content: "Content #2"
+            content: 'Content #2'
           }
         ]
       }
     end
 
-    it "must parse order params with array of comments" do
+    it 'must parse order params with array of comments' do
       form = OrderForm.from_params(order: params)
 
       expect(form.comments.is_a?(Array)).to eq true
@@ -115,14 +115,14 @@ RSpec.describe Redress::Form do
       expect(comment.is_a?(CommentForm)).to eq true
     end
 
-    context "action_controller parameters" do
-      require "action_controller/metal/strong_parameters"
+    context 'action_controller parameters' do
+      require 'action_controller/metal/strong_parameters'
 
       let(:order_params) do
         ActionController::Parameters.new(order: params)
       end
 
-      it "must parse order params" do
+      it 'must parse order params' do
         form = OrderForm.from_params(order_params)
 
         expect(form.attributes.key?(:non_exists_attribute)).to eq false

@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "redress/identity"
+require 'redress/identity'
 
 module Redress
 end
 
-require "redress/types"
-require "redress/form"
-require "redress/command"
+require 'redress/types'
+require 'redress/form'
+require 'redress/command'

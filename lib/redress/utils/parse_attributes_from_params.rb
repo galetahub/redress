@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "redress/utils/attributes_hash"
+require 'redress/utils/attributes_hash'
 
 module Redress
   module Utils
@@ -22,6 +22,7 @@ module Redress
 
       def prefix
         return if @options[:prefix].blank?
+
         @prefix ||= @options[:prefix].to_s
       end
 
@@ -29,7 +30,7 @@ module Redress
         @full_prefix ||= "#{prefix}_"
       end
 
-      protected
+      private
 
       def extract_attributes
         hash = model_attributes.merge!(prefix_attibutes)
