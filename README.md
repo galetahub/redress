@@ -119,7 +119,7 @@ end
 
 Form with context:
 
-```
+```ruby
 class CommentForm < Redress::Form
   define_schema do
     attribute :id, Redress::Types::Coercible::Integer
