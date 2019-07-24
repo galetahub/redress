@@ -4,6 +4,6 @@ require 'dry-types'
 
 module Redress
   module Types
-    include Dry::Types.module
+    include Dry::Types()
   end
 end

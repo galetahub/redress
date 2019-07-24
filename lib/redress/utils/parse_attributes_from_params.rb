@@ -34,7 +34,9 @@ module Redress
 
       def extract_attributes
         hash = model_attributes.merge!(prefix_attibutes)
-        AttributesHash.new(hash).extract!(*@klass.schema.keys)
+        declared_keys = @klass.schema.keys.map(&:name)
+
+        AttributesHash.new(hash).extract!(*declared_keys)
       end
 
       def prefix_attibutes

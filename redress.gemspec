@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
     spec.cert_chain = [Gem.default_cert_path]
   end
 
-  spec.required_ruby_version = '~> 2.3'
+  spec.required_ruby_version = '~> 2.5'
 
   spec.add_dependency 'activemodel', '>= 4.2.0'
-  spec.add_dependency 'dry-struct', '~> 0.5.0'
-  spec.add_dependency 'dry-types', '~> 0.13.2'
+  spec.add_dependency 'dry-struct', '~> 1.0'
+  spec.add_dependency 'dry-types', '~> 1.1'
   spec.add_dependency 'hashie', '>= 3.5.7'
   spec.add_dependency 'wisper', '>= 2.0.0'
 

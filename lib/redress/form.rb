@@ -19,7 +19,7 @@ module Redress
     attr_reader :context
 
     transform_keys(&:to_sym)
-    transform_types { |type| type.meta(omittable: true) }
+    transform_types(&:omittable)
 
     def self.model_name
       ActiveModel::Name.new(self, nil, mimicked_model_name.to_s.camelize)
@@ -82,7 +82,7 @@ module Redress
     protected
 
     def write_attribute(name, value)
-      return unless self.class.attribute?(name)
+      return unless self.class.has_attribute?(name)
 
       @attributes[name] = safe_coercion(name, value)
     end
@@ -90,9 +90,9 @@ module Redress
     private
 
     def safe_coercion(name, value)
-      type = self.class.schema[name]
+      type = self.class.schema.key(name)
       type[value]
-    rescue ArgumentError
+    rescue Dry::Types::CoercionError
       nil
     end
   end

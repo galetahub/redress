@@ -22,7 +22,7 @@ RSpec.describe Redress::Form do
 
   it 'must get schema' do
     schema = SimpleForm.schema
-    expect(schema.keys).to eq %i[nickname name email name_with_email age]
+    expect(schema.keys.map(&:name)).to eq %i[nickname name email name_with_email age]
   end
 
   it 'must coercion age value' do
