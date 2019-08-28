@@ -29,8 +29,18 @@ RSpec.describe Redress::Form do
     expect(form.age).to eq 30
   end
 
-  it 'must return nil for bio when blank' do
+  it 'must return nil for bio when empty' do
     form.bio = ' '
+    expect(form.bio).to eq nil
+  end
+
+  it 'must return nil for bio when blank' do
+    form.bio = ''
+    expect(form.bio).to eq nil
+  end
+
+  it 'must return nil for nil' do
+    form.bio = nil
     expect(form.bio).to eq nil
   end
 
@@ -92,6 +102,16 @@ RSpec.describe Redress::Form do
   it 'must return active_model to_param' do
     expect(comment.to_param).to eq 1.to_s
     expect(form.to_param).to eq nil
+  end
+
+  it 'must build with blank bio' do
+    form = SimpleForm.new(params.merge(bio: ''))
+    expect(form.bio).to eq nil
+  end
+
+  it 'must strip bio attribute' do
+    form = SimpleForm.new(params.merge(bio: ' test '))
+    expect(form.bio).to eq 'test'
   end
 
   context 'multiple' do
