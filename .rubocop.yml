@@ -67,5 +67,5 @@ Style/StringMethods:
   Enabled: true
 Style/SymbolArray:
   Enabled: true
-Style/VariableNumber:
+Naming/VariableNumber:
   EnforcedStyle: snake_case

@@ -1,3 +1,7 @@
+# v0.4.1
+
+- Add new custom type: StrippedString
+
 # v0.2.2
 
 - Add support for ActionController/Parameters (http://api.rubyonrails.org/classes/ActionController/Parameters.html)
