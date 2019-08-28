@@ -1,3 +1,7 @@
+# v0.4.2
+
+- Custom type StrippedString now coercible
+
 # v0.4.1
 
 - Add new custom type: StrippedString
