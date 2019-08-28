@@ -63,9 +63,9 @@ class SimpleForm < ApplicationForm
   mimic :user
 
   define_schema do
-    attribute :nickname, Redress::Types::Strict::String.default("superman")
-    attribute :name, String
-    attribute :email, String
+    attribute :nickname, Redress::Types::Strict::String.default('superman')
+    attribute :name, Redress::Types::StrippedString
+    attribute :email, Redress::Types::StrippedString
     attribute :name_with_email, String
     attribute :age, Redress::Types::Coercible::Integer
     atttibute :terms_of_service, Redress::Types::Bool
