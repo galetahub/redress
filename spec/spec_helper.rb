@@ -16,6 +16,7 @@ require 'bundler/setup'
 require 'pry'
 require 'pry-byebug'
 require 'pry-state'
+require 'active_model'
 require 'redress'
 
 Dir[File.join(File.dirname(__FILE__), 'support/shared_contexts/**/*.rb')].each do |file|

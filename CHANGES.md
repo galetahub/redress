@@ -1,3 +1,7 @@
+# v0.5.0
+
+- ActiveModel now is not required by default.
+
 # v0.4.2
 
 - Custom type StrippedString now coercible

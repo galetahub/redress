@@ -1,5 +1,6 @@
 AllCops:
   TargetRubyVersion: 2.5.1
+  NewCops: disable
   Exclude:
     - "db/schema.rb"
     - "node_modules/**/*"
@@ -23,7 +24,7 @@ Metrics/BlockLength:
   Exclude:
     - "**/*.gemspec"
     - "spec/**/*"
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
 Metrics/ParameterLists:
   Max: 3

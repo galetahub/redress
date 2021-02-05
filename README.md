@@ -32,6 +32,11 @@ The command pattern is sometimes called a service object, an operation, an actio
 1. wisper
 2. dry-struct
 3. hashie
+
+### Optional
+
+To support validations just add activemodel to your project
+
 4. activemodel
 
 ## Setup
