@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'hashie', '>= 3.5.7'
   spec.add_dependency 'wisper', '>= 2.0.0'
 
-  spec.add_development_dependency 'actionpack', '~> 5.1.4'
+  spec.add_development_dependency 'actionpack', '~> 5.2'
   spec.add_development_dependency 'coveralls', '~> 0.8.21'
   spec.add_development_dependency 'guard-rspec', '~> 4.7'
   spec.add_development_dependency 'pry', '~> 0.10'
