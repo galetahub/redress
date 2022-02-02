@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.5.1
+  TargetRubyVersion: 2.7.4
   NewCops: disable
   Exclude:
     - "db/schema.rb"
@@ -63,10 +63,12 @@ Style/SafeNavigation:
 Style/Send:
   Enabled: true
 Style/SignalException:
-  EnforcedStyle: semantic
+  Enabled: false
 Style/StringMethods:
   Enabled: true
 Style/SymbolArray:
   Enabled: true
 Naming/VariableNumber:
   EnforcedStyle: snake_case
+Lint/MissingSuper:
+  Enabled: false

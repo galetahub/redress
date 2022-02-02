@@ -19,9 +19,12 @@ class SimpleCommand < Redress::Command
   end
 
   def call
+    return Failure('Invalid input argument a') unless @a
+    return Failure('Invalid input argument b') unless @b
+
     @value = @a + @b
 
-    broadcast(:ok, @value)
+    Success(@value)
   end
 end
 

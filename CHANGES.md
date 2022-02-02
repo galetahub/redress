@@ -1,3 +1,9 @@
+# v1.0.0
+
+- Now command use dry/monads instead wisper
+- Update ruby version to 2.7
+- Update dependent gems
+
 # v0.5.0
 
 - ActiveModel now is not required by default.

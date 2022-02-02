@@ -18,24 +18,25 @@ Gem::Specification.new do |spec|
     spec.cert_chain = [Gem.default_cert_path]
   end
 
-  spec.required_ruby_version = '~> 2.5'
+  spec.required_ruby_version = '~> 2.7'
 
-  spec.add_dependency 'dry-struct', '~> 1.0'
-  spec.add_dependency 'dry-types', '~> 1.1'
-  spec.add_dependency 'hashie', '>= 3.5.7'
-  spec.add_dependency 'wisper', '>= 2.0.0'
+  spec.add_dependency 'dry-matcher'
+  spec.add_dependency 'dry-monads', '~> 1.4.0'
+  spec.add_dependency 'dry-struct', '~> 1.4.0'
+  spec.add_dependency 'dry-types', '~> 1.5.0'
+  spec.add_dependency 'hashie'
 
-  spec.add_development_dependency 'actionpack', '~> 5.2'
+  spec.add_development_dependency 'actionpack', '~> 6.1'
   spec.add_development_dependency 'activemodel', '>= 4.2.0'
-  spec.add_development_dependency 'coveralls', '~> 0.8.21'
-  spec.add_development_dependency 'guard-rspec', '~> 4.7'
-  spec.add_development_dependency 'pry', '~> 0.10'
-  spec.add_development_dependency 'pry-byebug', '~> 3.4'
-  spec.add_development_dependency 'pry-state', '~> 0.1'
-  spec.add_development_dependency 'rake', '~> 12.0'
-  spec.add_development_dependency 'reek', '~> 4.7'
-  spec.add_development_dependency 'rspec', '~> 3.6'
-  spec.add_development_dependency 'rubocop', '~> 0.49'
+  spec.add_development_dependency 'coveralls'
+  spec.add_development_dependency 'guard-rspec'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'pry-byebug'
+  spec.add_development_dependency 'pry-state'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
 
   spec.files = Dir['lib/**/*']
   spec.extra_rdoc_files = Dir['README*', 'LICENSE*']

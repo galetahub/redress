@@ -73,7 +73,7 @@ class SimpleForm < ApplicationForm
     attribute :email, Redress::Types::StrippedString
     attribute :name_with_email, String
     attribute :age, Redress::Types::Coercible::Integer
-    atttibute :terms_of_service, Redress::Types::Bool
+    attribute :terms_of_service, Redress::Types::Bool
   end
 
   validates :name, presence: true
@@ -150,20 +150,7 @@ CommentForm.new(content: 'Hi').with_context(order: order)
 # app/commands/application_command.rb
 require 'redress/command'
 
-class ApplicationCommand < Redress::Commad
-end
-```
-
-Or if you are using ActiveRecord:
-
-```ruby
-# app/commands/application_command.rb
-require 'redress/command'
-
-class ApplicationCommand < Redress::Commad
-  def transaction(&block)
-    ActiveRecord::Base.transaction(&block) if block_given?
-  end
+class ApplicationCommand < Redress::Command
 end
 ```
 
@@ -178,11 +165,15 @@ module Users
     end
 
     def call
-      return broadcast(:invalid, @form) if @form.invalid?
+      return Failure(@form) if @form.invalid?
 
-      user = User.create(@form.attributes)
+      user = User.new(@form.attributes)
 
-      broadcast(:ok, user)
+      if user.save
+        Success(user)
+      else
+        Failure(user)
+      end
     end
   end
 end
@@ -203,8 +194,8 @@ class UsersController < Account::BaseController
     @user_form = SimpleForm.from_params(params)
 
     Users::CreateCommand.call(@user_form) do |c|
-      c.on(:ok) { head status: 201 }
-      c.on(:invalid) { |form| render status: 422, json: { errors: form.errors } }
+      c.success { head status: 201 }
+      c.failure { |form| render status: 422, json: { errors: form.errors } }
     end
   end
 end

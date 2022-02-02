@@ -1,21 +1,32 @@
 # frozen_string_literal: true
 
-require 'wisper'
+require 'dry/monads'
+require 'dry/monads/do'
+require 'dry/matcher/result_matcher'
 
 module Redress
   class Command
-    include Wisper::Publisher
+    include Dry::Monads[:result]
 
     def self.call(*args, &block)
-      run(*args, &block)
-      nil
+      result = new(*args).call
+      return result unless block_given?
+
+      Dry::Matcher::ResultMatcher.call(result, &block)
     end
 
-    def self.run(*args)
+    def self.run(*args, &block)
       command = new(*args)
-      yield command if block_given?
-      command.call
+      result = command.call
+      return command unless block_given?
+
+      Dry::Matcher::ResultMatcher.call(result, &block)
+
       command
+    end
+
+    def call
+      raise NotImplementedError
     end
   end
 end

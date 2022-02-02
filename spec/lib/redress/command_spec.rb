@@ -17,11 +17,28 @@ RSpec.describe Redress::Command do
     total = 0
 
     result = SimpleCommand.call(a, b) do |c|
-      c.on(:ok) { |value| total = value }
+      c.success { |value| total = value }
+      c.failure { total = 0 }
     end
 
     expect(total).to eq a + b
-    expect(result).to eq nil
+    expect(result).to eq total
+  end
+
+  context 'when arguments are invalid' do
+    let(:a) { nil }
+
+    it 'must call failure callback' do
+      total = 0
+
+      result = SimpleCommand.call(a, b) do |c|
+        c.success { |value| total = value }
+        c.failure { total = 0 }
+      end
+
+      expect(total).to eq 0
+      expect(result).to eq total
+    end
   end
 
   context 'instance' do
