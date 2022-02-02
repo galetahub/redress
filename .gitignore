@@ -2,6 +2,5 @@
 .bundle
 .rubocop-http*
 pkg/*
-Gemfile.lock
 tmp
 coverage
