@@ -1,6 +1,6 @@
 # v1.0.0
 
-- Now command use dry/monads instead wisper
+- Now command is using dry/monads instead wisper gem
 - Update ruby version to 2.7
 - Update dependent gems
 

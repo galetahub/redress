@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
     spec.cert_chain = [Gem.default_cert_path]
   end
 
-  spec.required_ruby_version = '~> 2.7'
+  spec.required_ruby_version = '>= 2.1.0'
 
   spec.add_dependency 'dry-matcher'
   spec.add_dependency 'dry-monads', '~> 1.4.0'
