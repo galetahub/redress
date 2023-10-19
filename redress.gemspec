@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.1.0'
 
   spec.add_dependency 'dry-matcher'
-  spec.add_dependency 'dry-monads', '~> 1.4.0'
-  spec.add_dependency 'dry-struct', '~> 1.4.0'
-  spec.add_dependency 'dry-types', '~> 1.5.0'
+  spec.add_dependency 'dry-monads', '>= 1.4.0'
+  spec.add_dependency 'dry-struct', '>= 1.4.0'
+  spec.add_dependency 'dry-types', '>= 1.5.0'
   spec.add_dependency 'hashie'
 
   spec.add_development_dependency 'actionpack', '~> 6.1'

@@ -1,5 +1,5 @@
 AllCops:
-  TargetRubyVersion: 2.7.4
+  TargetRubyVersion: 3.2.2
   NewCops: disable
   Exclude:
     - "db/schema.rb"

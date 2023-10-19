@@ -1,3 +1,8 @@
+# v1.0.1
+
+- Update ruby version to 3.2.2
+- Update dependent gems
+
 # v1.0.0
 
 - Now command is using dry/monads instead wisper gem
