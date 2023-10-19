@@ -13,9 +13,6 @@ else
 end
 
 require 'bundler/setup'
-require 'pry'
-require 'pry-byebug'
-require 'pry-state'
 require 'active_model'
 require 'redress'
 

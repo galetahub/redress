@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/redress.svg)](http://badge.fury.io/rb/redress)
 [![Code Climate](https://codeclimate.com/github/galetahub/redress/badges/gpa.svg)](https://codeclimate.com/github/galetahub/redress)
-[![Build Status](https://semaphoreci.com/api/v1/igor-galeta/redress/branches/master/shields_badge.svg)](https://semaphoreci.com/igor-galeta/redress)
+[![Build Status](https://galetahub.semaphoreci.com/badges/redress/branches/master.svg?style=shields&key=1c60c225-c1b2-4889-9887-18aacf2e6184)](https://galetahub.semaphoreci.com/projects/redress)
 [![Coverage Status](https://coveralls.io/repos/github/galetahub/redress/badge.svg?branch=master)](https://coveralls.io/github/galetahub/redress?branch=master)
 
 ## Motivation (Command pattern)
