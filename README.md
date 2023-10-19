@@ -29,7 +29,7 @@ The command pattern is sometimes called a service object, an operation, an actio
 ## Requirements
 
 0. [Ruby 2.3](https://www.ruby-lang.org)
-1. wisper
+1. dry-monads
 2. dry-struct
 3. hashie
 
